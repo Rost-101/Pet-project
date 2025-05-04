@@ -5,6 +5,20 @@
 ## Датасет
 Датасет містить дані про продажі електромобілів:
 - `ID`, `Date`, `Region`, `Brand`, `Vehicle_Type`, `Battery_Capacity_kWh`, `Discount_Percentage`, `Customer_Segment`, `Fast_Charging_Option`, `Units_Sold`, `Revenue`.
+## Поля таблиці
+| **Column** | **Field**               | **Description**                                                      |
+|---------|-------------------------|----------------------------------------------------------------------|
+| A       | **ID**                  | Identifier                                                           |
+| B       | **Date**                | Represents a month in YYYY-MM format                                 |
+| C       | **Region**              | Geographic region where sales took place                             |
+| D       | **Brand**               | Automotive brand (e.g., Toyota, BYD, Tesla, etc.)                    |
+| E       | **Vehicle_Type**        | Category (Crossover, Truck, Sedan, Hatchback, etc.)                   |
+| F       | **Battery_Capacity_kWh**| Battery capacity in kilowatt-hours                                   |
+| G       | **Discount_Percentage** | Discount applied to final sale (%)                                    |
+| H       | **Customer_Segment**    | Broad segmentation (e.g., High Income, Middle Income, Budget Conscious)|
+| I       | **Fast_Charging_Option**| Indicates if the vehicle supports fast-charging                      |
+| J       | **Units_Sold**          | Total number of units sold                                           |
+| K       | **Revenue**             | Total revenue from units sold                                        |
 ## Етапи виконання
 ### 1. Підготовка та перевірка данних
 1. **Видалення дублів**: Перевірено та видалено дублікати на основі `ID` для забезпечення цілісності даних.
@@ -12,10 +26,39 @@
 3. **Форматування дати**: Уніфіковано `Date` до формату YYYY-MM для узгодженості.
 4. **Перевірка даних**: Переконано, що всі числові поля (`Battery_Capacity_kWh`, `Discount_Percentage`, `Units_Sold`, `Revenue`) містять коректні значення.
 
-### Формули для розрахунку характеристик таблиці:
+#### Формули для розрахунку характеристик таблиці:
 1. Кількість стовпців: `=COLUMNS()` 2. Кількість рядків: `=ROWS()` 3. Кількість унікальних рядків: `COUNTUNIQUE()` 4. Кількість порожніх значень: `=COUNTBLANK()` 5. Відсоток пустих клітинок: `=COUNTBLANK()/ROWS()*100`
 
-### ✅ Результати: 
+#### ✅ Результат: 
 <img src="https://github.com/user-attachments/assets/a555e7a9-f045-4f92-a993-43d11c11d81c" width="600">
+
+### 2. Створення допоміжних стовпців для аналізу продажів
+1. **Avg Price/Unit**: `=IF(J2=0,0,K2/J2)`
+   - **Користь**: Розрахунок середньої ціни за одиницю для аналізу рентабельності.
+
+2. **Sales Classification**: `=IF(J2<120, "Low", IF(J2 <= 230, "Medium", "High"))`
+   - **Користь**: Сегментація продажів для оптимізації маркетингових стратегій.
+
+3. **Market Share by Brand**: `=J2/SUMIFS(J:J, D:D, D2, C:C, C2)`
+   - **Користь**: Оцінка частки ринку кожного бренду в регіоні.
+
+4. **Sales Rank by Vehicle Type**: `=RANK(J2, FILTER(J:J, H:H=H2))`
+   - **Користь**: Присвоєння рейтингу типам автомобілів за продажами в кожному сегменті клієнтів.
+#### ✅ Результат: 
+<img src="https://github.com/user-attachments/assets/b5464e95-112a-4241-ab44-0c1496aed7e7">
+
+### 3. Зведені таблиці та діаграми
+
+1. **Зведена таблиця**:
+   - Створено зведену таблицю для порівняння кількості проданих одиниць і доходу брендів. Це дозволяє визначити лідерів за продажами та доходами.
+
+2. **Діаграма "Market Share of Brands by Revenue"**:
+   - Діаграма показує, що **BMW** займає найбільшу частку ринку, за ним йдуть **Kia** і **Ford**. **Tesla** та **Volkswagen** мають найменшу частку ринку серед брендів.
+
+3. **Діаграма "Car Brand Performance: Sales vs. Revenue"**:
+   - Діаграма ілюструє порівняння між кількістю продажів та доходами брендів. **BMW** має високий дохід, хоча обсяг продажів не є найвищим. **Kia** та **Toyota** мають великі обсяги продажів, але менший дохід через нижчі ціни. **Tesla** генерує високий дохід при менших продажах.
+#### ✅ Результат:
+<img src="https://github.com/user-attachments/assets/876a5669-a61b-4542-991c-b88b3758c71a">  
+
  
 
