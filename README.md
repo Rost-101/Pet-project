@@ -12,6 +12,10 @@
 3. **Форматування дати**: Уніфіковано `Date` до формату YYYY-MM для узгодженості.
 4. **Перевірка даних**: Переконано, що всі числові поля (`Battery_Capacity_kWh`, `Discount_Percentage`, `Units_Sold`, `Revenue`) містять коректні значення.
 
-## ✅ Результати: 
-<img src="https://github.com/user-attachments/assets/a555e7a9-f045-4f92-a993-43d11c11d81c" width="500">
+### Формули для розрахунку характеристик таблиці:
+1. Кількість стовпців: `=COLUMNS()` 2. Кількість рядків: `=ROWS()` 3. Кількість унікальних рядків: `COUNTUNIQUE()` 4. Кількість порожніх значень: `=COUNTBLANK()` 5. Відсоток пустих клітинок: `=COUNTBLANK()/ROWS()*100`
+
+### ✅ Результати: 
+<img src="https://github.com/user-attachments/assets/a555e7a9-f045-4f92-a993-43d11c11d81c" width="600">
+ 
 
